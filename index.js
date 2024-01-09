@@ -15,7 +15,9 @@ server.use(cors())
 server.use(morgan("dev"));
 server.use(express.static(path.resolve(__dirname,'build')));
 
-
+server.get('/',(req,res)=>{
+  res.json("Hello World")
+})
 
 const auth = (req, res, next) => {
   const authHeader = req.get("Authorization");

@@ -57,8 +57,9 @@ const connect = async () =>{
     }
 };
 
+const Port = process.env.MONGO || 6001
 
-server.listen(8080, () => {
+server.listen(Port, () => {
   console.log("server is running on port 8080");
   connect()
 });

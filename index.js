@@ -62,7 +62,7 @@ const connect = async () =>{
 const Port = 6001
 
 server.listen(Port, () => {
-  console.log("server is running on port 8080");
+  console.log("server is running on port 6001");
   connect()
 });
 

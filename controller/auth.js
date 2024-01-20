@@ -5,14 +5,28 @@ const bcrypt = require('bcrypt')
 
 
 
-exports.Signup=(req,res)=>{
-    const user = new USERS(req.body);
-    // var token = JWT.sign({email:req.body.email}, process.env.SECRET,{ expiresIn: '10m' })
-    const hash = bcrypt.hashSync(req.body.password,10)
-    user.password = hash
-    // user.token = token
-    user.save()
-    res.status(201).json("OK")
+exports.Signup= async (req,res)=>{
+   try{
+    const doc = await USERS.findOne({ email: req.body.email });
+        
+    if (doc) {
+        // If user not found, send a 401 Unauthorized response
+        return res.json("exist");
+    }
+
+        const user = new USERS(req.body);
+        // var token = JWT.sign({email:req.body.email}, process.env.SECRET,{ expiresIn: '10m' })
+        const hash = bcrypt.hashSync(req.body.password,10)
+        user.password = hash
+        // user.token = token
+        await user.save()
+        res.status(201).json("OK")
+  
+
+   }catch(err){
+    console.error('Error during signup:', err);
+    res.status(500).json('Internal Server Error');
+   }
 }
 
 exports.Login = async (req, res) => {

@@ -1,6 +1,6 @@
 const model = require('../models/product')
 const Product = model.Product
-const ejs = require('ejs')
+const ejs = require('ejs') // for server side rendering
 const path = require('path')
 
 exports.getAllproductsSSR = async(req,res)=>{
